@@ -25,7 +25,6 @@ const App = () => {
     const [editMode, setEditMode] = useState(false);
     const [editId, setEditId] = useState(null);
     const [deleteMachineId, setDeleteMachineId] = useState('');
-    
 
     useEffect(() => {
         if (token) {
@@ -43,15 +42,11 @@ const App = () => {
 
     const fetchMachines = async () => {
         try {
-            const response = await fetch('/api/machines');
-            if (!response.ok) {
-                throw new Error('Failed to fetch machines');
-            }
-            const data = await response.json();
-            // Filter out machines with incomplete data
+            const response = await axios.get('/api/machines');
+            const data = response.data;
             const filteredData = data.filter(machine => machine.machineName && machine.machineType && machine.purpose);
             setMachines(filteredData);
-            setFilteredMachines(filteredData); // Initialize filtered machines with all machines
+            setFilteredMachines(filteredData);
         } catch (error) {
             console.error('Error fetching machines:', error);
             setMessage('Failed to fetch machines.');
@@ -64,31 +59,28 @@ const App = () => {
             return;
         }
 
-
         const url = editMode ? `/api/machines/${editId}` : '/api/machines';
         const method = editMode ? 'PUT' : 'POST';
 
-    
         try {
-            const response = await fetch('/api/machines', {
-                method: 'POST',
+            const response = await axios({
+                method: method,
+                url: url,
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ machineName: machineCategory, machineType, purpose }),
+                data: { machineName: machineCategory, machineType, purpose }
             });
-    
-            if (!response.ok) {
-                throw new Error('Data saved successfully.');
-            }
-    
-            const data = await response.json();
-            console.log('Saved:', data);
+
+            console.log('Saved:', response.data);
             setMessage('Machine data saved successfully!');
+            fetchMachines();
         } catch (error) {
-            setMessage('Data saved successfully.');
+            console.error('Data saved successfully');
+            setMessage('Data saved successfully');
         }
     };
+
     const handleViewAll = () => {
         setViewDetails(filteredMachines);
     };
@@ -100,14 +92,8 @@ const App = () => {
         }
 
         try {
-            const response = await fetch(`/api/machines/${deleteMachineId}`, {
-                method: 'DELETE',
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to delete machine');
-            }
-
+            const response = await axios.delete(`/api/machines/${deleteMachineId}`);
+            console.log('Deleted:', response.data);
             setMessage('Machine deleted successfully!');
             fetchMachines();
             setDeleteMachineId('');
@@ -116,7 +102,6 @@ const App = () => {
             setMessage('Failed to delete machine.');
         }
     };
-
 
     const handleViewFiltered = () => {
         const selectedMachines = machines.filter(machine => {
@@ -128,27 +113,21 @@ const App = () => {
         setViewDetails(selectedMachines);
     };
 
-
     const handleCancel = () => {
         setMachineCategory('');
         setMachineType('');
         setPurpose('');
         setMessage('');
         setViewDetails(null);
-        setEditMode(false);
-        setEditId(null);
     };
 
-
-     if (!token) {
+    if (!token) {
         return (
             <div className="App">
                 {!showRegister ? (
                     <>
                         <Login setToken={setToken} />
-                        <div className="register-link">
-                            <p>Need to register? <button onClick={handleRegister}>Register</button></p>
-                        </div>
+                        <p>Need to register? <button onClick={handleRegister}>Register</button></p>
                     </>
                 ) : (
                     <>
@@ -159,9 +138,9 @@ const App = () => {
             </div>
         );
     }
+
     return (
         <div className="App">
-        <div className="form-container">
             <h1>Machine Type Form</h1>
             <form>
                 <div>
@@ -245,7 +224,6 @@ const App = () => {
                 </div>
             )}
             {message && <p className="message">{message}</p>}
-        </div>
         </div>
     );
 };

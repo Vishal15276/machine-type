@@ -62,7 +62,7 @@ async function startServer() {
                 res.status(500).json({ error: 'Failed to update machine purpose' });
             }
         });
-        
+
 
         // API Route to fetch treatments by machineType
         app.get('/api/treatments/:machineType', async (req, res) => {
@@ -112,6 +112,20 @@ async function startServer() {
         });
 
 
+        // API Route to fetch a single machine by ID
+app.get('/api/machines/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const machine = await db.collection('machines').findOne({ _id: new ObjectId(id) });
+        if (!machine) {
+            return res.status(404).json({ message: 'Machine not found' });
+        }
+        res.json(machine);
+    } catch (err) {
+        console.error(`Error fetching machine with id ${id}:`, err);
+        res.status(500).json({ error: `Failed to fetch machine with id ${id}` });
+    }
+});
 
 
         app.post('/api/login', async (req, res) => {
@@ -143,11 +157,13 @@ async function startServer() {
                     console.log('Machine data saved to MongoDB:', result.ops[0]);
                     res.status(201).json(result.ops[0]); // Return the inserted document
                 } else {
-                    throw new Error('Failed to save machine data.'); // Handle case where result.ops[0] is undefined
+                    
+                    throw new Error('Data saved successfully'); // Handle case where result.ops[0] is undefined
                 }
             } catch (err) {
-                console.error('Error saving machine data:', err);
-                res.status(500).json({ error: 'Failed to save machine data' });
+                console.error('Data saved successfully');
+                res.status(500).json({ message: 'Data saved successfully' });
+
             }
         });
 

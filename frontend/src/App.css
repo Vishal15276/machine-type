@@ -1,5 +1,6 @@
 /* App.css */
 
+/* Global styles */
 body {
     margin: 0;
     padding: 0;
@@ -11,30 +12,27 @@ body {
 
 .App {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start; /* Align items to flex-start to move content down */
+    align-items: center;
     min-height: 100vh;
-    padding-top: 50px; /* Add padding to move content down */
-    color: white;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-}
-
-.form-container {
-    background-color: rgba(0, 0, 0, 0.5); /* Make form container transparent */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 100%;
-    margin-right: 20px; /* Move the form to the right */
+    padding-top: 50px;
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
-    color: rgb(242, 235, 235); /* Change text color to white for better visibility */
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
 }
 
 form {
+    max-width: 600px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.886);
+    padding: 20px;
+    border-radius: 10px;
     margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 label {
@@ -50,7 +48,7 @@ textarea {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: #f0f0f0;
     transition: border-color 0.3s ease;
 }
 
@@ -59,18 +57,14 @@ textarea:focus {
     outline: none;
     border-color: #007bff;
 }
-
 .button-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.App {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+.button-container button {
+    margin-right: 10px; /* Adjust the right margin to create space between buttons */
 }
 
 button {
@@ -82,7 +76,6 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    margin-right: 10px;
 }
 
 button:hover {
@@ -95,7 +88,7 @@ button:hover {
     background-color: #f8f9fa;
     border: 1px solid #ced4da;
     border-radius: 4px;
-    color:#000000;
+    color: #000000;
 }
 
 .message {
@@ -114,18 +107,61 @@ button:hover {
 }
 
 .register-link {
-  margin-top: 400px; /* Adjust margin-top to bring it down */
-  text-align: center; /* Center align the text */
+    margin-top: 20px;
+    text-align: center;
 }
 
 .register-link button {
-  background: none;
-  border: none;
-  color: #007bff;
-  text-decoration: underline;
-  cursor: pointer;
+    background: none;
+    border: none;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .register-link button:hover {
-  color: #0056b3;
+    color: #0056b3;
 }
+
+/* Styles for specific elements */
+
+/* Style for the main heading */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+/* Style for form labels */
+label {
+    font-size: 1.1rem;
+}
+
+/* Style for form inputs */
+select,
+textarea {
+    font-size: 1rem;
+}
+
+/* Style for form buttons */
+button {
+    font-size: 1rem;
+}
+
+/* Additional styling for the view details section */
+.view-details {
+    margin-top: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the message section */
+.message {
+    margin-top: 20px;
+}
+
+/* Styling for register link */
+.register-link {
+    margin-top: 30px;
+    font-size: 1.1rem;
+}
+

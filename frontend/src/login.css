@@ -1,12 +1,4 @@
-.login-container {
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transform: translateY(50px);
-}
+
 
 h2 {
     text-align: center;
@@ -59,7 +51,7 @@ button:hover {
 
 p {
     text-align: center;
-    color: #555;
+    color: #000000;
 }
 
 a {
