@@ -1,47 +1,131 @@
+/* App.css */
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('./bg1.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
 }
 
-.container {
-  width: 50%;
-  margin: 100px auto;
-  background: #fff;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to flex-start to move content down */
+    min-height: 100vh;
+    padding-top: 50px; /* Add padding to move content down */
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.form-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Make form container transparent */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 100%;
+    margin-right: 20px; /* Move the form to the right */
 }
 
 h1 {
-  text-align: center;
-  color: #333;
+    text-align: center;
+    color: rgb(242, 235, 235); /* Change text color to white for better visibility */
 }
 
 form {
-  display: flex;
-  flex-direction: column;
+    margin-top: 20px;
 }
 
 label {
-  margin-top: 10px;
-  font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
 }
 
-select, textarea, button {
-  margin-top: 5px;
-  padding: 10px;
-  font-size: 1em;
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.App {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
 }
 
 button {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  cursor: pointer;
-  margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
 }
 
 button:hover {
-  background-color: #0056b3;
+    background-color: #0056b3;
+}
+
+.view-details {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    color:#000000;
+}
+
+.message {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    border-radius: 4px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.register-link {
+  margin-top: 400px; /* Adjust margin-top to bring it down */
+  text-align: center; /* Center align the text */
+}
+
+.register-link button {
+  background: none;
+  border: none;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.register-link button:hover {
+  color: #0056b3;
 }
