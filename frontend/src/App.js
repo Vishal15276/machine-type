@@ -46,40 +46,41 @@ const App = () => {
             const data = response.data;
             const filteredData = data.filter(machine => machine.machineName && machine.machineType && machine.purpose);
             setMachines(filteredData);
-            setFilteredMachines(filteredData);
+            setFilteredMachines(filteredData); // Update filtered machines if necessary
         } catch (error) {
             console.error('Error fetching machines:', error);
             setMessage('Failed to fetch machines.');
         }
     };
+    
 
     const handleSave = async () => {
         if (!machineCategory || !machineType || !purpose) {
             alert('All fields are required.');
             return;
         }
-
-        const url = editMode ? `/api/machines/${editId}` : '/api/machines';
-        const method = editMode ? 'PUT' : 'POST';
-
+    
         try {
-            const response = await axios({
-                method: method,
-                url: url,
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                data: { machineName: machineCategory, machineType, purpose }
+            const response = await axios.post('/api/machines', {
+                machineName: machineCategory,
+                machineType,
+                purpose
             });
-
+    
             console.log('Saved:', response.data);
             setMessage('Machine data saved successfully!');
-            fetchMachines();
+            fetchMachines(); // Fetch updated list of machines after saving
+            setMachineCategory(''); // Clear form fields after successful save
+            setMachineType('');
+            setPurpose('');
         } catch (error) {
             console.error('Data saved successfully');
             setMessage('Data saved successfully');
         }
     };
+    
+    
+    
 
     const handleViewAll = () => {
         setViewDetails(filteredMachines);
@@ -114,12 +115,24 @@ const App = () => {
     };
 
     const handleCancel = () => {
+        setToken('');
+        localStorage.removeItem('token');
         setMachineCategory('');
         setMachineType('');
         setPurpose('');
         setMessage('');
         setViewDetails(null);
+        localStorage.removeItem('machineCategory');
+        localStorage.removeItem('machineType');
+        localStorage.removeItem('purpose');
     };
+
+
+    const handleSetToken = (newToken) => {
+        setToken(newToken);
+        localStorage.setItem('token', newToken);
+    };
+
 
     if (!token) {
         return (
